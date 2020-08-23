@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.ibsvalley.androidtask.helper.EndlessRecyclerViewScrollListener;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
 
         layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rvCars.setLayoutManager(layout);
          carsAdapter = new CarsAdapter(MainActivity.this, data);
         rvCars.setAdapter(carsAdapter);
 
@@ -39,10 +41,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 PAGE++;
+                Log.i("@@@@@@@@@", "onLoadMore: "+PAGE);
                 getData(PAGE);
 
 
             }
+
         });
         getData(PAGE);
 
